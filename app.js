@@ -1,25 +1,23 @@
 /*
  *  * Module dependencies
  *   */
-var crypto = require('crypto');
-
-var msg = 'secret'
-var hash = 'hash'
-
 var express = require('express')
 
 var app = express()
 
+function blockCpuFor(ms) {
+	var now = new Date().getTime();
+	var result = 0
+	while(true) {
+		result += Math.random() * Math.random();
+		if (new Date().getTime() > now +ms)
+			return;
+	}	
+}
+
 app.get('/', function (req, res) {
+  blockCpuFor(5000); // CPU-intensive
 
-  
-  var i;
-  for (i = 0; i < 100; i++) {
-    hash = crypto.createHash('sha256').update(msg).digest('hex')
-    msg = hash
-  }
-  console.log(msg)
-
-  res.end('<html><body bgcolor=green><h1>Hi there! '+msg+'</h1></body></html>')
+  res.end('<html><body bgcolor=green><h1>Hi there!</h1></body></html>')
 })
 app.listen(8080)
