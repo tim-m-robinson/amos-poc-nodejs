@@ -18,6 +18,6 @@ function blockCpuFor(ms) {
 app.get('/', function (req, res) {
   blockCpuFor(5000); // CPU-intensive
 
-  res.end('<html><body bgcolor=green><h1>Hi there!</h1></body></html>')
+  res.end('<html><body bgcolor=blue><h1>Hi there!</h1></body></html>')
 })
 app.listen(8080)
